@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visa and Pass Status</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input, select {
+      padding: 5px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Search Visa and Pass Status</h2>
+  <label>Document No: </label>
+  <input type="text" id="searchBox" placeholder="Enter Document No">
+  <button onclick="search()">SEARCH</button>
+
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Citizen</th>
+        <th>Document No</th>
+        <th>Last Pass Due Date</th>
+        <th>Current Pass Type</th>
+        <th>Renewal Pass Duration (Month)</th>
+        <th>Current Pass Due Date</th>
+        <th>Current Visa Type</th>
+        <th>Application Status</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <script>
+    const data = [
+      {
+        name: "SYED IQRAR HUSSAIN",
+        citizen: "PAKISTAN",
+        document: "KB6909243",
+        lastDue: "11/03/2025",
+        passType: "VISIT PASS TEMPORARY EMPLOYMENT",
+        duration: "12",
+        currentDue: "11/03/2026",
+        visaType: "MULTIPLE ENTRY VISA",
+        status: "PRINT"
+      },
+      {
+        name: "SYED IQRAR HUSSAIN",
+        citizen: "PAKISTAN",
+        document: "KB6909243",
+        lastDue: "11/03/2025",
+        passType: "VISIT PASS TEMPORARY EMPLOYMENT",
+        duration: "12",
+        currentDue: "11/03/2026",
+        visaType: "MULTIPLE ENTRY VISA",
+        status: "PAY"
+      },
+      {
+        name: "Asim Ali",
+        citizen: "INDIAN",
+        document: "D7654321",
+        lastDue: "2024-03-03",
+        passType: "EMPLOYMENT PASS (CATEGORY 1)",
+        duration: "12",
+        currentDue: "2025-03-03",
+        visaType: "TYPE D",
+        status: "APPROVED"
+      }
+    ];
+
+    function search() {
+      const input = document.getElementById("searchBox").value.toUpperCase();
+      const filtered = data.filter(item => item.document === input);
+      const tbody = document.getElementById("table-body");
+      tbody.innerHTML = "";
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='10'>No record found</td></tr>";
+      } else {
+        filtered.forEach((item, index) => {
+          const row = `<tr>
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.citizen}</td>
+            <td>${item.document}</td>
+            <td>${item.lastDue}</td>
+            <td>${item.passType}</td>
+            <td>${item.duration}</td>
+            <td>${item.currentDue}</td>
+            <td>${item.visaType}</td>
+            <td>${item.status}</td>
+          </tr>`;
+          tbody.innerHTML += row;
+        });
+      }
+    }
+  </script>
+</body>
+</html>
